@@ -1,0 +1,7 @@
+.DS_Store
+/turbo_chatroom/tmp/cache
+/turbo_chatroom/storage
+/turbo_chatroom/log
+/turbo_chatroom/tmp
+/turbo_chatroom/db/development.sqlite3
+
