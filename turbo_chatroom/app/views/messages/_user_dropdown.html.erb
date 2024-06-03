@@ -9,7 +9,7 @@
             <%= content_tag(:p, user.role, class: "msg-role-#{user.role}") %>
         </div>
         <li><hr class="dropdown-divider"></li>
-        <li><%= link_to "Message", user, class: "dropdown-item" %></li>
+        <li><%= link_to "Message", user, data: { turbo_frame: "_top" }, class: "dropdown-item" %></li>
         <li><%= link_to "Another Option", "#", class: "dropdown-item" %></li>
     </ul>
 </div>

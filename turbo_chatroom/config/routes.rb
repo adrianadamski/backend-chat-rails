@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'call', to: 'call#create'
 
   post 'api/messages/:id/hide', to: 'api/messages#hide'
+  get 'api/users', to: 'api/users#index'
 
   resources :rooms do
     resources :messages
@@ -25,6 +26,5 @@ Rails.application.routes.draw do
   get 'user/:id', to: 'users#show', as: 'user'
   # Defines the root path route ("/")
   # root "articles#index"
-
 
 end
