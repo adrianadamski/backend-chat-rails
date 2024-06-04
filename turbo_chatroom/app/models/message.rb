@@ -18,10 +18,8 @@ class Message < ApplicationRecord
   end
 
   after_update_commit  do
-    # notify_recipients -
-    # update_parent_room -- ??
-    broadcast_append_later_to room
-    #broadcast_to_home_page
+    broadcast_replace_later_to room
+    broadcast_to_home_page
   end
 
   def chat_attachment(index)

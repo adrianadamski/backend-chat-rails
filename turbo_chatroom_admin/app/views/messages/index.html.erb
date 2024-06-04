@@ -1,0 +1,13 @@
+<h1 class="mt-3">Messages#index</h1>
+
+<%= turbo_frame_tag "messages" do %>
+  <%= render "messages/message", messages: @messages %>
+
+  <% if @messages.empty? %>
+    There are no messages
+  <% else %>
+    <p class="text-center">
+      <%= link_to 'More', messages_index_path(last: @messages.last[:id]), class: 'btn btn-primary w-100 mt-3' %>
+    </p>
+  <% end %>
+<% end %>

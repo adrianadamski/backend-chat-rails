@@ -12,6 +12,7 @@ class AppearanceChannel < ApplicationCable::Channel
   def online
     status = User.statuses[:online]
     broadcast_new_status(status)
+    $redis.set("user:#{current_user.id}:username", current_user.username)
   end
 
   def away

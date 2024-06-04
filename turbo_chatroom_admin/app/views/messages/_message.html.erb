@@ -1,0 +1,15 @@
+<% @messages.each do |message| %>
+  <div class="card mt-2">
+    <div class="card-header">
+      <%= @users[message[:user_id]] %> // [<%= message[:user_id] %>]
+    </div>
+    <div class="card-body <%if message[:is_hidden] %> bg-danger-subtle <% end %>">
+      <%= message[:body] %>
+      <% if !message[:is_hidden] %>
+        <%= form_with url: "/messages/" + message[:message_id].to_s + "/hide", method: :post do |form| %>
+          <%= form.submit "Hide", class: "btn btn-danger mt-2" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
