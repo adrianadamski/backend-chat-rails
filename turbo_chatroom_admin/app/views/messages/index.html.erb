@@ -1,7 +1,10 @@
 <h1 class="mt-3">Messages#index</h1>
+<%= turbo_stream_from :messagebox %>
 
-<%= turbo_frame_tag "messages" do %>
-  <%= render "messages/message", messages: @messages %>
+<%= turbo_frame_tag :messagebox do %>
+  <% @messages.each do |message| %>
+    <%= render "messages/message", message: message %>
+  <% end %>
 
   <% if @messages.empty? %>
     There are no messages

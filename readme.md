@@ -1,17 +1,16 @@
 # Ticket nr 5555
 
-AS IS:
+## Changelog
 
-The turbo chatroom is a small application for users to talk to each other. You can sign up and send messages to other users, but if you send an unwanted message there is nothing nobody can do about it.
+### turbo_chatroom
+- Secure API hide endpoint
+- Make hidden message live disappear
+- Send username to Redis
 
-TO BE:
+### turbo_chatroom_admin
+- Create new Admin user system with login
+- Use "message" redis stream to receive messages from turbo_chatroom and display it to the admin
+- Add task app:receive_messages to live broadcast new messages
 
-Write a companion app next to turbo chatroom that will help admins moderate the users activity. It needs following functionalites
-- login for admins
-- view of messages being sent
-- a button to hide given message. When it's pressed the message should be hidden in turbo chatroom
-
-
-Connect the two applications however you want, any modifications you need in turbo chatroom to solve the ticket are most welcome.
-
-Once done, pleace replace this readme with short documentation (bullet points) about what you did and why.
+To connect two apps together I decided to use redis stream because, firstly, I found an implementation of adding new messages to the stream and no usage, so i took it as a tip ;-)
+Secondly, using Redis is more suitable than API because of performance, and "turbo_chatroom" doesn't need to know about "turbo_chatroom_admin" existing.

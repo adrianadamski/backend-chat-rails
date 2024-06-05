@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  include MessageParser
   API_URL = ENV.fetch('API_URL')
   API_TOKEN = ENV.fetch('API_TOKEN')
 
@@ -11,9 +10,8 @@ class MessagesController < ApplicationController
       last = '(' + params[:last]
     end
 
-    @messages = $redis.xrevrange('messages', last, '-', count: 5)
-    @messages = parse_messages(@messages)
-    @users = get_message_users(@messages)
+    messages = $redis.xrevrange('messages', last, '-', count: 5)
+    @messages = MessageParser.new.parse_messages(messages)
   end
 
   def hide
@@ -25,17 +23,5 @@ class MessagesController < ApplicationController
     end
 
     redirect_back(fallback_location: root_path)
-  end
-
-  private
-  def get_message_users(messages)
-    uids = messages.map {|m| m[:user_id]}.uniq
-
-    response = {}
-    uids.each do |uid|
-      response[uid] = $redis.get("user:#{uid}:username")
-    end
-
-    response
   end
 end
